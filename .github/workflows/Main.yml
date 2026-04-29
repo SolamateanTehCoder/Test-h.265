@@ -1,0 +1,34 @@
+name: Generate H.265 Video
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  generate-video:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install opencv-python numpy
+    
+    - name: Generate H.265 video
+      run: python generate_h265_video.py
+    
+    - name: Upload video artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: h265-video
+        path: random_video.h265
+        retention-days: 30
