@@ -10,7 +10,7 @@ duration = 10
 total_frames = fps * duration
 
 # Create a VideoWriter object
-fourcc = cv2.VideoWriter_fourcc(*'h264')
+fourcc = cv2.VideoWriter_fourcc(*'h265')
 video_writer = cv2.VideoWriter('random_video.h265', fourcc, fps, (width, height))
 
 for _ in range(total_frames):
