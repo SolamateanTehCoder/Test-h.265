@@ -1,1 +1,22 @@
-import cv2\nimport numpy as np\nimport random\n\n# Video settings\nwidth, height = 320, 240\nfps = 30\nduration = 10\nnum_frames = fps * duration\ncodec = cv2.VideoWriter_fourcc(*'h265')\noutput_filename = 'random_video.h265'\n\n# Create VideoWriter object\nvout = cv2.VideoWriter(output_filename, codec, fps, (width, height))\n\nfor _ in range(num_frames):\n    # Generate random frame\n    random_frame = np.random.randint(0, 256, (height, width, 3), dtype=np.uint8)\n    vout.write(random_frame)\n\nvout.release()\n\nprint('Random 10-second video generated successfully!')\n
+import cv2
+import numpy as np
+
+# Video parameters
+width, height = 320, 240
+fps = 30
+duration = 10
+
+# Calculate total number of frames
+total_frames = fps * duration
+
+# Create a VideoWriter object
+fourcc = cv2.VideoWriter_fourcc(*'h264')
+video_writer = cv2.VideoWriter('random_video.h265', fourcc, fps, (width, height))
+
+for _ in range(total_frames):
+    # Generate a random frame
+    frame = np.random.randint(0, 256, (height, width, 3), dtype=np.uint8)
+    video_writer.write(frame)
+
+video_writer.release()
+print('Video created: random_video.h265')
